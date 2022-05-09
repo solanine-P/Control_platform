@@ -1,0 +1,22 @@
+{
+  "ID": "1",
+  "sequence":1,
+  "name": "按钮一",
+  "btnBg": "/YM001/BG/2019012123391961784.png",
+  "goLink": "YM002",
+  "deviceType": "1",
+  "remark": "D01",
+  "x": 250,
+  "y": 300
+}
+{
+  "ID": "2",
+  "sequence":2,
+  "name": "按钮二",
+  "btnBg": "/YM001/BG/2019012123391961784.png",
+  "goLink": "YM003",
+  "deviceType": "2",
+  "remark": "D02",
+  "x": 450,
+  "y": 500
+}

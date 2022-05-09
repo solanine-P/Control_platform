@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
+    <title>Central control platform</title>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/normal.css">
+    <link rel="stylesheet" href="css/index.css">
+    <!--<link rel="stylesheet" href="css/validation.css">-->
+</head>
+<body>
+<div class="container">
+    <div class="top">
+        <a class="login"><img src="images/user.png"></a>
+    </div>
+    <ul class="nav">
+        <li>
+            <span><a class="btn btn-primary btn_first openEditBox">YM001页面一</a></span>
+        </li>
+        <li>
+            <span><a class="btn btn-primary btn_first openEditBox">YM002页面二</a></span>
+            <ul class="ExhibitionAreaNav">
+                <li>
+                    <p>
+                        <a class="btn btn-primary exhibitionArea">zq001序厅</a>
+                        <a class="btn btn-primary device">zq001设备</a>
+                    </p>
+                    <span>
+                            <button type="button" class="btn btn-info" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-info" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-info" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-info" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
+                        </span>
+                </li>
+            </ul>
+            <span><a class="btn btn-primary btn_first"  data-toggle="modal" data-target="#formModal_YM002" id="addExhibition">添加展区</a></span>
+        </li>
+        <li>
+            <span><a class="btn btn-primary btn_first openEditBox">YM003页面三</a></span>
+        </li>
+        <li>
+           <span>
+                <a class="btn btn-primary btn_first" href="http://127.0.0.1:3000/databaseOperatingPlatform" target="_blank">数据平台</a>
+           </span>
+        </li>
+    </ul>
+    <!--右侧编辑区域-->
+    <div class="dynamicAdditionZone">
+        <h2><span class="glyphicon glyphicon-pushpin"></span>&nbsp;&nbsp;<i>YM001页面一</i></h2>
+        <span class="btn btn-primary fileinput-button btn_first">
+                <span>背景更换</span>
+                <input type="file" name="bg" id="bg">
+             </span>
+        <!-- Button trigger modal -->
+        <a class="btn btn-primary btn_first" data-toggle="modal" id="addBtn" data-target="#formModal_YM001">按钮添加</a>
+        <div class="dynamicAdditionView">
+            <img src="" width="100%" height="100%" alt="">
+            <div id="dynamicAddition">
+                <!--<button class="btn btn-success">序厅</button>-->
+                <!--<button class="btn btn-success">展厅</button>-->
+            </div>
+        </div>
+        <button class="btn btn-primary commit">保存</button>
+        <button class="btn btn-primary build">生成</button>
+    </div>
+</div>
+
+<!-- 页面一按钮弹框 -->
+<div class="modal fade" id="formModal_YM001" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert alert-success">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title " id="myModalLabel">
+                    <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                    YM001按钮配置区
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form class="cmxform" id="firstLevelForm" method="post" action="/firstLevelForm" enctype="multipart/form-data">
+                    <div class="form-group has-success">
+                        <label for="name_1">按钮名称 (必需, 最小两个字符) :</label>
+                        <input type="text" class="form-control" id="name_1" name="name_1"  placeholder="请输入按钮名称" required>
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="btnBg_1">按钮皮肤 :</label>
+                        <input type="file" id="btnBg_1" name="btnBg_1" placeholder="请选择皮肤">
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="btnWidth_1">按钮宽度 :</label>
+                        <input type="number" class="form-control" max="500" min="50" id="btnWidth_1" name="btnWidth_1" placeholder="请输入按钮宽度50-500(单位像素)" required>
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="btnHeight_1">按钮高度 :</label>
+                        <input type="number" class="form-control" max="500" min="50" id="btnHeight_1" name="btnHeight_1" placeholder="请输入按钮高度50-500(单位像素)" required>
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="fontSize_1">字体大小 :</label>
+                        <input type="number" class="form-control" max="100" min="14" id="fontSize_1" name="fontSize_1" placeholder="请输入字体大小14-100(单位像素)" required>
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="fontColor_1">字体颜色 :</label>
+                        <select name="fontColor_1" id="fontColor_1" class="form-control">
+                            <option value="write">白色</option>
+                            <option value="black">黑色</option>
+                        </select>
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="url_1">链接ID (必需) :</label>
+                        <!--<input type="text" class="form-control" id="url_1" name="url_1" placeholder="请输入链接ID" required>-->
+                        <select class="form-control" name="url_1" id="url_1">
+                            <option value="visit.html">页面二</option>
+                            <option value="Administration.html">页面三</option>
+                        </select>
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="remark_1">备注 (必需) :</label>
+                        <input type="text" class="form-control" id="remark_1" name="remark_1" placeholder="请输入备注" required>
+                    </div>
+                    <div class="modal-footer has-success">
+                        <button class="btn btn-primary submit" type="submit">确认</button>
+                        <button class="btn btn-primary modify" type="submit">修改</button>
+                        <button class="btn btn-primary isDelete" type="button">删除</button>
+                        <button class="btn btn-primary" data-dismiss="modal" type="button">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 页面二添加展区弹框 -->
+<div class="modal fade" id="formModal_YM002" tabindex="-1" role="dialog" aria-labelledby="addExhibitionAreaModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert alert-success">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title ">
+                    <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                    YM002添加展区
+                </h4>
+                <!--<div  class="alert alert-info" role="alert">按钮配置区</div>-->
+            </div>
+            <div class="modal-body">
+                <form class="cmxform" id="secondLevelForm" method="post" action="/AddExhibitionAreaForm" enctype="multipart/form-data">
+                    <!--<div class="form-group has-success">-->
+                        <!--<label for="ID_2">ID :</label>-->
+                        <!--<input type="text" class="form-control" id="ID_2" placeholder="请输入ID" name="ID_2">-->
+                    <!--</div>-->
+                    <div class="form-group has-success">
+                        <label for="name_2">按钮名称 (必需, 最小两个字符) :</label>
+                        <input type="text" class="form-control" id="name_2" name="name_2"  placeholder="请输入按钮名称" required>
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="btnBg_2">按钮皮肤:</label>
+                        <input type="file"  id="btnBg_2" name="btnBg_2" placeholder="请选择皮肤">
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="btnWidth_2">按钮宽度 :</label>
+                        <input type="number" class="form-control" max="500" min="50" id="btnWidth_2" name="btnWidth_2" placeholder="请输入按钮宽度50-500(单位像素)" required>
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="btnHeight_2">按钮高度 :</label>
+                        <input type="number" class="form-control" max="500" min="50" id="btnHeight_2" name="btnHeight_2" placeholder="请输入按钮高度50-500(单位像素)" required>
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="fontSize_2">字体大小 :</label>
+                        <input type="number" class="form-control" max="100" min="14" id="fontSize_2" name="fontSize_2" placeholder="请输入字体大小14-100(单位像素)" required>
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="fontColor_2">字体颜色 :</label>
+                        <select name="fontColor_2" id="fontColor_2" class="form-control">
+                            <option value="write">白色</option>
+                            <option value="black">黑色</option>
+                        </select>
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="url_2">链接ID (必需) :</label>
+                        <!--<input type="text" class="form-control" id="url_2" name="url_2" placeholder="请输入链接ID" required>-->
+                        <select class="form-control" name="url_2" id="url_2">
+                            <option value="back_operation">返回</option>
+                            <option value="media">媒体页</option>
+                        </select>
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="remark_2">备注 (必需) :</label>
+                        <input type="text" class="form-control" id="remark_2"  name="remark_2" placeholder="请输入备注" required>
+                    </div>
+                    <div class="modal-footer has-success">
+                        <button class="btn btn-primary submit" type="submit">确认</button>
+                        <button class="btn btn-primary modify" type="submit">修改</button>
+                        <button class="btn btn-primary isDelete" type="button">删除</button>
+                        <button class="btn btn-primary" data-dismiss="modal" type="button">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 页面二展区下多媒体按钮弹框 -->
+<div class="modal fade" id="formModal_YM002_exhibition" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert alert-success">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title ">
+                    <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                    YM002展区下多媒体按钮配置
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form class="cmxform" id="secondMediaForm" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group has-success">
+                                <label for="name_2_device">按钮名称 (必需, 最小两个字符) :</label>
+                                <input type="text" class="form-control" id="name_2_exhibition" name="name_2_device"  placeholder="请输入按钮名称" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <div class="form-group has-success">
+                                <label for="url_2_exhibition">链接ID (必需) :</label>
+                                <!--<input type="text" class="form-control" id="url_2_exhibition" name="url_2_exhibition" placeholder="请输入链接ID" required>-->
+                                <select name="url_2_exhibition" id="url_2_exhibition" class="form-control">
+                                    <option value="sendCommend">自定义命令</option>
+                                    <option value="keyMouse">键鼠</option>
+                                    <option value="word">解说词</option>
+                                    <option value="device">设备</option>
+                                    <option value="back_exhibition">返回</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group has-success">
+                                <label for="btnBg_2_exhibition">皮肤:</label>
+                                <input type="file"  id="btnBg_2_exhibition" name="btnBg_3_exhibition" placeholder="请选择皮肤">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group has-success">
+                                <label for="btnWidth_2_exhibition">按钮宽度 :</label>
+                                <input type="number" class="form-control" max="500" min="50" id="btnWidth_2_exhibition" name="btnWidth_2_exhibition" placeholder="请输入按钮宽度50-500(单位像素)" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group has-success">
+                                <label for="btnHeight_2_exhibition">按钮高度 :</label>
+                                <input type="number" class="form-control" max="500" min="50" id="btnHeight_2_exhibition" name="btnHeight_2_exhibition" placeholder="请输入按钮高度50-500(单位像素)" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group has-success">
+                                <label for="fontSize_2_exhibition">字体大小 :</label>
+                                <input type="number" class="form-control" max="100" min="14" id="fontSize_2_exhibition" name="fontSize_2_exhibition" placeholder="请输入字体大小14-100(单位像素)" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group has-success">
+                                <label for="fontColor_2_exhibition">字体颜色 :</label>
+                                <select name="fontColor_2_exhibition" id="fontColor_2_exhibition" class="form-control">
+                                    <option value="write">白色</option>
+                                    <option value="black">黑色</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group has-success">
+                                <label for="command_2_exhibition">配置命令 (必需) :</label>
+                                <input type="text" class="form-control" id="command_2_exhibition" name="command_2_exhibition" placeholder="请输入命令" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="remark_2_exhibition">备注 (必需) :</label>
+                        <input type="text" class="form-control" id="remark_2_exhibition" name="remark_2_exhibition" placeholder="请输入内容备注">
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="word_2_exhibition">解说词 :</label>
+                        <input type="text" class="form-control" id="word_2_exhibition" name="word_2_exhibition" placeholder="请输入解说词">
+                    </div>
+                    <div class="modal-footer has-success">
+                        <button class="btn btn-primary submit" type="submit">确认</button>
+                        <button class="btn btn-primary modify" type="submit">修改</button>
+                        <button class="btn btn-primary isDelete" type="button">删除</button>
+                        <button class="btn btn-primary" data-dismiss="modal" type="button">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 页面二展区下设备按钮弹框 -->
+<div class="modal fade" id="formModal_YM002_device" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert alert-success">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title ">
+                    <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                    YM002展区设备按钮配置
+                </h4>
+                <!--<div  class="alert alert-info" role="alert">按钮配置区</div>-->
+            </div>
+            <div class="modal-body">
+                <form class="cmxform" id="secondDeviceForm" method="post" enctype="multipart/form-data">
+                    <!--<div class="form-group has-success">-->
+                        <!--<label for="ID_2_device">ID :</label>-->
+                        <!--<input type="text" class="form-control" id="ID_2_device" placeholder="请输入ID" name="ID_2_device" required>-->
+                    <!--</div>-->
+                    <div class="form-group has-success">
+                        <label for="name_2_device">按钮名称 (必需, 最小两个字符) :</label>
+                        <input type="text" class="form-control" id="name_2_device" name="name_2_device"  placeholder="请输入按钮名称" required>
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="btnBg_2_device">按钮皮肤:</label>
+                        <input type="file"  id="btnBg_2_device" name="btnBg_3_device" placeholder="请选择皮肤">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group has-success">
+                                <label for="btnWidth_2_device">按钮宽度 :</label>
+                                <input type="number" class="form-control" max="500" min="50" id="btnWidth_2_device" name="btnWidth_2_device" placeholder="请输入按钮宽度50-500(单位像素)" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group has-success">
+                                <label for="btnHeight_2_device">按钮高度 :</label>
+                                <input type="number" class="form-control" max="500" min="50" id="btnHeight_2_device" name="btnHeight_2_device" placeholder="请输入按钮高度50-500(单位像素)" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group has-success">
+                                <label for="fontSize_2_device">字体大小 :</label>
+                                <input type="number" class="form-control" max="100" min="14" id="fontSize_2_device" name="fontSize_2_device" placeholder="请输入字体大小14-100(单位像素)" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group has-success">
+                                <label for="fontColor_2_device">字体颜色 :</label>
+                                <select name="fontColor_2_device" id="fontColor_2_device" class="form-control">
+                                    <option value="write">白色</option>
+                                    <option value="black">黑色</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="url_2_device">链接ID (必需) :</label>
+                        <select name="url_2_device" class="form-control" id="url_2_device">
+                            <option value="sendCommend">自定义命令</option>
+                            <option value="back_exhibition">返回</option>
+                        </select>
+                        <!--<input type="text" class="form-control" id="url_2_device" name="url_2_device" placeholder="请输入链接ID" required>-->
+                    </div>
+                    <!--<div class="form-group has-success">-->
+                        <!--<label for="SBLX_2_device">设备类型 (必需) :</label>-->
+                        <!--<select name="SBLX_2_device" id="SBLX_2_device" class="form-control">-->
+                            <!--<option value="JSJKGSB">计算机开关设备</option>-->
+                            <!--<option value="CKKZSB">串口控制设备</option>-->
+                            <!--<option value="DGKZSB">灯光控制设备</option>-->
+                            <!--<option value="QTSB">其他设备</option>-->
+                        <!--</select>-->
+                    <!--</div>-->
+                    <div class="form-group has-success">
+                        <label for="command_2_device">配置命令 (必需) :</label>
+                        <input type="text" class="form-control" id="command_2_device" name="command_2_device" placeholder="请输入命令" required>
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="remark_2_device">备注 (必需) :</label>
+                        <input type="text" class="form-control" id="remark_2_device" name="remark_2_device" placeholder="请输入备注" required>
+                    </div>
+                    <div class="modal-footer has-success">
+                        <button class="btn btn-primary submit" type="submit">确认</button>
+                        <button class="btn btn-primary modify" type="submit">修改</button>
+                        <button class="btn btn-primary isDelete" type="button">删除</button>
+                        <button class="btn btn-primary" data-dismiss="modal" type="button">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 页面三按钮弹框 -->
+<div class="modal fade" id="formModal_YM003" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert alert-success">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title " id="myModalLabel3">
+                    <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                    YM003按钮配置区
+                </h4>
+                <!--<div  class="alert alert-info" role="alert">按钮配置区</div>-->
+            </div>
+            <div class="modal-body">
+                <form class="cmxform" id="thirdLevelForm" method="post" enctype="multipart/form-data">
+                    <!--<div class="form-group has-success">-->
+                        <!--<label for="ID_3">ID :</label>-->
+                        <!--<input type="text" class="form-control" id="ID_3" placeholder="请输入ID" name="ID_3">-->
+                    <!--</div>-->
+                    <div class="form-group has-success">
+                        <label for="name_3">按钮名称 (必需, 最小两个字符) :</label>
+                        <input type="text" class="form-control" id="name_3" name="name_3"  placeholder="请输入按钮名称" required>
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="btnBg_3">按钮皮肤 :</label>
+                        <input type="file"  id="btnBg_3" name="btnBg_3" placeholder="请选择皮肤">
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="btnWidth_3">按钮宽度 :</label>
+                        <input type="number" class="form-control" max="500" min="50" id="btnWidth_3" name="btnWidth_3" placeholder="请输入按钮宽度50-500(单位像素)" required>
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="btnHeight_3">按钮高度 :</label>
+                        <input type="number" class="form-control" max="500" min="50" id="btnHeight_3" name="btnHeight_3" placeholder="请输入按钮高度50-500(单位像素)" required>
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="fontSize_3">字体大小 :</label>
+                        <input type="number" class="form-control" max="100" min="14" id="fontSize_3" name="fontSize_3" placeholder="请输入字体大小14-100(单位像素)" required>
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="fontColor_3">字体颜色 :</label>
+                        <select name="fontColor_3" id="fontColor_3" class="form-control">
+                            <option value="write">白色</option>
+                            <option value="black">黑色</option>
+                        </select>
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="url_3">链接ID (必需) :</label>
+                        <!--<input type="text" class="form-control" id="url_3" name="url_3" placeholder="请输入链接ID" required>-->
+                        <select name="url_3" id="url_3" class="form-control">
+                            <option value="sendCommand">自定义命令</option>
+                            <option value="back_operation">返回</option>
+                        </select>
+                    </div>
+                    <!--<div class="form-group has-success">-->
+                        <!--<label for="SBLX_3">设备类型 (必需) :</label>-->
+                        <!--<select name="SBLX_3" id="SBLX_3" class="form-control">-->
+                            <!--<option value="JSJKGSB">计算机开关设备</option>-->
+                            <!--<option value="CKKZSB">串口控制设备</option>-->
+                            <!--<option value="DGKZSB">灯光控制设备</option>-->
+                            <!--<option value="QTSB">其他设备</option>-->
+                        <!--</select>-->
+                    <!--</div>-->
+                    <div class="form-group has-success">
+                        <label for="configCommand_3">配置命令 :</label>
+                        <input type="text" class="form-control" id="configCommand_3" name="configCommand_3" placeholder="请输入命令">
+                    </div>
+                    <div class="form-group has-success">
+                        <label for="remark_3">备注 (必需) :</label>
+                        <input type="text" class="form-control" id="remark_3" name="remark_3" placeholder="请输入备注" required>
+                    </div>
+                    <div class="modal-footer has-success">
+                        <button class="btn btn-primary submit" type="submit">确认</button>
+                        <button class="btn btn-primary modify" type="submit">修改</button>
+                        <button class="btn btn-primary isDelete" type="button">删除</button>
+                        <button class="btn btn-primary" data-dismiss="modal" type="button">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 确认删除弹框 -->
+<div class="modal fade" id="isDeletedModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" >Modal title</h4>
+            </div>
+            <div class="modal-body">
+                确认删除吗？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary delete" data-dismiss="modal">确认删除</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="js/jquery.3.3.1.js"></script>
+<!--<script src="js/jquery.validate.min.js"></script>-->
+<!--<script src="js/messages_zh.js"></script>-->
+<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="js/index.js"></script>
+<script src="js/service.js"></script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YM002</title>
+    <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/normal.css">
+    <link rel="stylesheet" href="css/visit.css">
+    <link rel="stylesheet" href="css/keyboard.css">
+    <link rel="stylesheet" href="css/touchPad.css">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+<div class="container">
+    <div class="exhibition"></div>
+    <div class="media"></div>
+    <div class="device"></div>
+    <div class="word">
+        <button class="btn back">返回</button>
+        <div class="panel panel-default">
+            <div class="panel-heading">解说词</div>
+            <div class="panel-body">
+                Panel content
+            </div>
+        </div>
+    </div>
+    <div class="keyMouse">
+        <button class="btn back">返回</button>
+        <div class="mouse">
+            <div class="touchPad">
+                <div class="touchArea">
+
+                </div>
+                <span class="leftTouch" data-i="lt"></span>
+                <span class="btn btn-default rightTouch" data-i="rt"></span>
+            </div>
+        </div>
+        <div class="key">
+            <div class="keyboard">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/jquery.3.3.1.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/socket.io.js"></script>
+<script src="/operation/js/service.js"></script>
+<script src="/operation/js/command.js"></script>
+<script src="/operation/js/keyboard.js"></script>
+<script src="/operation/js/touchPad.js"></script>
+<script>
+    let Data;
+    let href = window.location.origin;
+    let caption;/*解说词*/
+    service.getSecondPageData(function(data){
+        Data = data;
+        loader(data);
+    });
+    service.getPageBg(2,function(data){
+        $('.exhibition').css({"background":"url("+data[0].bg+")","background-size":"100% 100%"});
+    });
+    function loader(data){
+        let a;
+        for(let i=0;i<data.length;i++){
+            console.log(data[i]);
+            if(data[i].url.indexOf("back")!=-1){
+                a = `<a class="btn btn-default" data-i="${data[i]._id}" href="${href+'/'+(data[i].url).split('_')[1]}">${data[i].name}</a>`;
+                $('.exhibition').append(a);
+                $(`.exhibition a[data-i*=${data[i]._id}]`).css({
+                    'left':data[i].position.x,
+                    'top':data[i].position.y,
+                    'background': 'url('+data[i].btnBg+')',
+                    'background-size':'100% 100%',
+                    'height':data[i].btnHeight,
+                    'width':data[i].btnWidth,
+                    'fontSize':data[i].fontSize?data[i].fontSize+'px':'14px',
+                    'color':data[i].fontColor?data[i].fontColor:'#ffffff'
+                });
+            }else{
+                a = `<button class="btn btn-default" data-i="${data[i]._id}" data-c="${data[i].command}">${data[i].name}</button>`;
+                $('.exhibition').append(a);
+                $(`.exhibition button[data-i*=${data[i]._id}]`).css({
+                    'left':data[i].position.x,
+                    'top':data[i].position.y,
+                    'background': 'url('+data[i].btnBg+')',
+                    'background-size':'100% 100%',
+                    'height':data[i].btnHeight,
+                    'width':data[i].btnWidth,
+                    'fontSize':data[i].fontSize?data[i].fontSize+'px':'14px',
+                    'color':data[i].fontColor?data[i].fontColor:'#ffffff'
+                });
+            }
+        }
+    }
+    /*媒体页面*/
+    function loadMeida(id){
+        let thisData;
+        for(let i=0;i<Data.length;i++){
+            if(Data[i]._id==id){
+                thisData = Data[i];
+            }
+        }
+        if(!thisData.media.length){
+            return
+        }
+        $('.media').html('');
+        $('.media').css({"background":""});
+        $('.media').show();
+        /*媒体页背景*/
+        service.getPageBg('2_1_'+thisData._id,function(data){
+            $('.media').css({"background":"url("+data[0].bg+")","background-size":"100% 100%"});
+        });
+        /*媒体按钮*/
+        for(let i=0;i<thisData.media.length;i++){
+            let a;
+            if(thisData.media[i].url.indexOf("back")!=-1){
+                a = `<a class="btn btn-default back" data-i="${thisData.media[i]._id}">${thisData.media[i].name}</a>`;
+                $('.media').append(a);
+                $(`.media a[data-i*=${thisData.media[i]._id}]`).css({
+                    'left':thisData.media[i].position.x,
+                    'top':thisData.media[i].position.y,
+                    'background': 'url('+thisData.media[i].btnBg+')',
+                    'background-size':'100% 100%',
+                    'height':thisData.media[i].btnHeight,
+                    'width':thisData.media[i].btnWidth,
+                    'fontSize':thisData.media[i].fontSize?thisData.media[i].fontSize+'px':'14px',
+                    'color':thisData.media[i].fontColor?thisData.media[i].fontColor:'#ffffff'
+                });
+            }
+            if(thisData.media[i].url=='sendCommend'){
+                a = `<button class="btn btn-default" data-i="${thisData.media[i]._id}" data-c="${thisData.media[i].command}">${thisData.media[i].name}</button>`;
+                $('.media').append(a);
+                $(`.media button[data-i*=${thisData.media[i]._id}]`).css({
+                    'left':thisData.media[i].position.x,
+                    'top':thisData.media[i].position.y,
+                    'background': 'url('+thisData.media[i].btnBg+')',
+                    'background-size':'100% 100%',
+                    'height':thisData.media[i].btnHeight,
+                    'width':thisData.media[i].btnWidth,
+                    'fontSize':thisData.media[i].fontSize?thisData.media[i].fontSize+'px':'14px',
+                    'color':thisData.media[i].fontColor?thisData.media[i].fontColor:'#ffffff'
+                });
+            }
+            if(thisData.media[i].url=="device"){
+                a = `<a class="btn btn-default openDevice" data-i="${thisData.media[i]._id}" data-pid="${id}">${thisData.media[i].name}</a>`;
+                $('.media').append(a);
+                $(`.media a[data-i*=${thisData.media[i]._id}]`).css({
+                    'left':thisData.media[i].position.x,
+                    'top':thisData.media[i].position.y,
+                    'background': 'url('+thisData.media[i].btnBg+')',
+                    'background-size':'100% 100%',
+                    'height':thisData.media[i].btnHeight,
+                    'width':thisData.media[i].btnWidth,
+                    'fontSize':thisData.media[i].fontSize?thisData.media[i].fontSize+'px':'14px',
+                    'color':thisData.media[i].fontColor?thisData.media[i].fontColor:'#ffffff'
+                });
+            }
+            if(thisData.media[i].url=="keyMouse"){
+                a = `<a class="btn btn-default openKeyMouse" data-c="${thisData.media[i].command}" data-i="${thisData.media[i]._id}" data-pid="${id}">${thisData.media[i].name}</a>`;
+                $('.media').append(a);
+                $(`.media a[data-i*=${thisData.media[i]._id}]`).css({
+                    'left':thisData.media[i].position.x,
+                    'top':thisData.media[i].position.y,
+                    'background': 'url('+thisData.media[i].btnBg+')',
+                    'background-size':'100% 100%',
+                    'height':thisData.media[i].btnHeight,
+                    'width':thisData.media[i].btnWidth,
+                    'fontSize':thisData.media[i].fontSize?thisData.media[i].fontSize+'px':'14px',
+                    'color':thisData.media[i].fontColor?thisData.media[i].fontColor:'#ffffff'
+                });
+            }
+            if(thisData.media[i].url=="word"){
+                a = `<a class="btn btn-default openWord" data-i="${thisData.media[i]._id}" data-pid="${id}">${thisData.media[i].name}</a>`;
+                $('.media').append(a);
+                $(`.media a[data-i*=${thisData.media[i]._id}]`).css({
+                    'left':thisData.media[i].position.x,
+                    'top':thisData.media[i].position.y,
+                    'background': 'url('+thisData.media[i].btnBg+')',
+                    'background-size':'100% 100%',
+                    'height':thisData.media[i].btnHeight,
+                    'width':thisData.media[i].btnWidth,
+                    'fontSize':thisData.media[i].fontSize?thisData.media[i].fontSize+'px':'14px',
+                    'color':thisData.media[i].fontColor?thisData.media[i].fontColor:'#ffffff'
+                });
+                caption = thisData.media[i].word;
+            }
+        }
+    }
+    /*设备页面*/
+    function loadDevice(id){
+        let thisData;
+        for(let i=0;i<Data.length;i++){
+            if(Data[i]._id==id){
+                thisData = Data[i];
+            }
+        }
+        if(!thisData.device.length){
+            return
+        }
+        $('.device').html('');
+        $('.device').css({"background":""});
+        $('.device').show();
+        service.getPageBg('2_2_'+thisData._id,function(data){
+            $('.device').css({"background":"url("+data[0].bg+")","background-size":"100% 100%"});
+        });
+        for(let i=0;i<thisData.device.length;i++){
+            let a ;
+            if(thisData.device[i].url.indexOf("back")!=-1){
+                a = `<a class="btn btn-default back" data-i="${thisData.device[i]._id}">${thisData.device[i].name}</a>`;
+                $('.device').append(a);
+                $(`.device a[data-i*=${thisData.device[i]._id}]`).css({
+                    'left':thisData.device[i].position.x,
+                    'top':thisData.device[i].position.y,
+                    'background': 'url('+thisData.device[i].btnBg+')',
+                    'background-size':'100% 100%',
+                    'height':thisData.device[i].btnHeight,
+                    'width':thisData.device[i].btnWidth,
+                    'fontSize':thisData.device[i].fontSize?thisData.device[i].fontSize+'px':'14px',
+                    'color':thisData.device[i].fontColor?thisData.device[i].fontColor:'#ffffff'
+                });
+            }
+            if(thisData.device[i].url=='sendCommend'){
+                a = `<button class="btn btn-default" data-i="${thisData.device[i]._id}" data-c="${thisData.device[i].command}">${thisData.device[i].name}</button>`;
+                $('.device').append(a);
+                $(`.device button[data-i*=${thisData.device[i]._id}]`).css({
+                    'left':thisData.device[i].position.x,
+                    'top':thisData.device[i].position.y,
+                    'background': 'url('+thisData.device[i].btnBg+')',
+                    'background-size':'100% 100%',
+                    'height':thisData.device[i].btnHeight,
+                    'width':thisData.device[i].btnWidth,
+                    'fontSize':thisData.device[i].fontSize?thisData.device[i].fontSize+'px':'14px',
+                    'color':thisData.device[i].fontColor?thisData.device[i].fontColor:'#ffffff'
+                });
+            }
+        }
+    }
+    $('.exhibition').on('click','button',function(){
+        let id = $(this).attr('data-i');
+        loadMeida(id);
+
+    });
+    $('.container').on('click','.media .openDevice',function(){
+        let id = $(this).attr('data-pid');
+        loadDevice(id);
+    });
+    $('.container').on('click','.media .openKeyMouse',function(){
+       $('.keyMouse').show();
+    });
+    $('.container').on('click','.media .openWord',function(){
+        $('.word').show();
+        $('.panel-body').html(caption);
+    });
+    /*返回媒体，设备页面返回*/
+    $('.container').on('click','.back',function(){
+        $(this.parentNode).hide();
+    });
+    /*发送命令*/
+    $('.container').on('click','.media button',function(){
+        let command = $(this).attr('data-c');
+        sendMes(command);
+    });
+    $('.container').on('click','.device button',function(){
+        let command = $(this).attr('data-c');
+        sendMes(command);
+    });
+</script>
+</body>
+</html>

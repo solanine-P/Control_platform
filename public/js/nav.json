@@ -1,0 +1,12 @@
+{
+  "data":[
+    {
+      "id":1,"name":"zq001","left":"450px","top":"500px","button":[
+        {"name":"序厅1","left":"290px","top":"350px"},
+        {"name":"序厅2","left":"290px","top":"350px"}
+      ]
+    }
+  ],
+  "resultCode":200,
+  "resultMessage":"查询成功"
+}

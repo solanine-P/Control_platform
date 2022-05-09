@@ -1,0 +1,108 @@
+{
+  "ID": "1",
+  "sequence":1,
+  "name": "序厅1",
+  "btnBg": "/YM001/BG/2019012123391961784.png",
+  "goLink": "YM002_1",
+  "remark": "none",
+  "x": 150,
+  "y": 300,
+  "media": [
+    {
+      "ID":"1m_1",
+      "sequence":1,
+      "name": "PPTmm",
+      "btnBg": "/YM001/BG/2019012123391961784.png",
+      "goLink": "YM002_1",
+      "remark": "none",
+      "x": 450,
+      "y": 689
+    },
+    {
+      "ID":"1m_2",
+      "sequence":2,
+      "name": "平台zzc",
+      "btnBg": "/YM001/BG/2019012123391961784.png",
+      "goLink": "YM002_1",
+      "remark": "none",
+      "x": 350,
+      "y": 636
+    }
+  ],
+  "device": [
+    {
+      "ID":"1d_1",
+      "sequence":1,
+      "name": "电脑一dx",
+      "btnBg": "/YM001/BG/2019012123391961784.png",
+      "goLink": "YM002_1",
+      "remark": "none",
+      "x": 250,
+      "y": 400
+    },
+    {
+      "ID":"1d_2",
+      "sequence":2,
+      "name": "电脑二aaa",
+      "btnBg": "/YM001/BG/2019012123391961784.png",
+      "goLink": "YM002_1",
+      "remark": "none",
+      "x": 330,
+      "y": 474
+    }
+  ]
+}
+{
+  "ID": "2",
+  "sequence":2,
+  "name": "序厅2",
+  "btnBg": "/YM001/BG/2019012123391961784.png",
+  "goLink": "YM002_1",
+  "remark": "none",
+  "x": 650,
+  "y": 400,
+  "media": [
+    {
+      "ID":"2m_1",
+      "sequence":1,
+      "name": "PPTq",
+      "btnBg": "/YM001/BG/2019012123391961784.png",
+      "goLink": "YM002_1",
+      "remark": "none",
+      "x": 450,
+      "y": 700
+    },
+    {
+      "ID":"2m_1",
+      "sequence":2,
+      "name": "平台222",
+      "btnBg": "/YM001/BG/2019012123391961784.png",
+      "goLink": "YM002_1",
+      "remark": "none",
+      "x": 250,
+      "y": 600
+    }
+  ],
+  "device": [
+    {
+      "ID":"2d_1",
+      "sequence":1,
+      "name": "电脑一333",
+      "btnBg": "/YM001/BG/2019012123391961784.png",
+      "goLink": "YM002_1",
+      "remark": "none",
+      "x": 424,
+      "y": 500
+    },
+    {
+      "ID":"2d_2",
+      "sequence":2,
+      "name": "电脑4",
+      "btnBg": "/YM001/BG/2019012123391961784.png",
+      "goLink": "YM002_1",
+      "remark": "none",
+      "x": 350,
+      "y": 612
+    }
+  ]
+}

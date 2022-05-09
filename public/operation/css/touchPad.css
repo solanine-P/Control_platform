@@ -1,0 +1,19 @@
+.touchPad{
+    position:relative;
+    width:450px;
+    height:300px;
+    border:1px solid #000000;
+    border-radius:10px;
+    overflow:hidden;
+}
+.touchArea{
+    float:left;
+    width:100%;
+    height:80%;
+    background-color: #9d9d9d;
+}
+.touchPad>span{
+    float:left;
+    width:50%;
+    height:20%;
+}

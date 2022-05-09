@@ -1,0 +1,27 @@
+.keyboard{
+    width:545px;
+    height:200px;
+    background-color:#909295;
+    box-sizing:border-box;
+    padding:5px;
+}
+.keyboard>div{
+    width: 100%;
+    display:flex;
+    justify-content: space-around;
+    margin-bottom:5px;
+}
+.keyboard>div>a{
+    width:48px;
+    height:42px;
+    /*margin-right:3px;*/
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.keyboard>div:nth-of-type(4)>button,.keyboard>div:nth-of-type(4)>a[data-i=return]{
+    width:125px;
+}
+.keyboard>div:nth-of-type(4)>a[data-i=space]{
+    width:260px;
+}

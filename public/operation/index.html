@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zigbee</title>
+    <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/normal.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+    <div class="container">
+
+    </div>
+    <script src="/js/jquery.3.3.1.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/operation/js/service.js"></script>
+    <script>
+        service.getFirstPageData(function(data){
+            loader(data);
+        });
+        service.getPageBg(1,function(data){
+            $('.container').css({"background":"url("+data[0].bg+")","background-size":"100% 100%"});
+        });
+        function loader(data){
+            let href = window.location.href;
+            let a;
+            for(let i=0;i<data.length;i++){
+                console.log(data[i]);
+                a = `<a class="btn btn-default" data-i="${data[i]._id}" href="${href+data[i].url}">${data[i].name}</a>`;
+                $('.container').append(a);
+                $(`.container a[data-i*=${data[i]._id}]`).css({
+                    'left':data[i].position.x,
+                    'top':data[i].position.y,
+                    'background': 'url('+data[i].btnBg+')',
+                    'background-size':'100% 100%',
+                    'height':data[i].btnHeight,
+                    'width':data[i].btnWidth,
+                    'fontSize':data[i].fontSize?data[i].fontSize+'px':'14px',
+                    'color':data[i].fontColor?data[i].fontColor:'#ffffff'
+                });
+            }
+        }
+    </script>
+</body>
+</html>

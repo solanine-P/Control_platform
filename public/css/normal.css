@@ -1,0 +1,34 @@
+html,body{
+    padding:0;
+    margin:0;
+}
+a{
+    cursor:pointer;
+}
+a:active{
+    opacity:0.5;
+}
+ul,li{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+textarea{
+    width:193px;
+}
+/*input[type="file"]{*/
+    /*width:199px;*/
+/*}*/
+p{
+    margin:0;
+    padding:0;
+}
+.btn_first{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:203px;
+    height:43px;
+    margin:auto;
+    font-size:20px;
+}

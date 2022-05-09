@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据库操作平台</title>
+    <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/normal.css">
+    <link rel="stylesheet" href="/css/bootstrap-table.min.css">
+    <link rel="stylesheet" href="/databaseOperatingPlatform/css/index.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <ul class="nav nav-tabs">
+            <li role="presentation" data-base="pptPlatform" class="active"><a>PPT管理</a></li>
+            <li role="presentation" data-base="videoPlatform" ><a>视频管理</a></li>
+            <li role="presentation" data-base="urlPlatform"><a>平台链接管理</a></li>
+            <li role="presentation" data-base="otherMediaPlatform"><a>其他多媒体管理</a></li>
+            <li role="presentation" data-base="computerPlatform"><a>计算机开关机管理</a></li>
+            <li role="presentation" data-base="serialDevicePlatform"><a>串口设备管理</a></li>
+            <li role="presentation" data-base="lightPlatform"><a>灯光设备管理</a></li>
+            <li role="presentation" data-base="otherDevicePlatform"><a>其他设备管理</a></li>
+        </ul>
+        <div id="toolbar" style="width: 300px">
+            <button class="btn btn-secondary openAddModal" data-toggle="modal" data-target="#modal_pptPlatform">新增</button>
+            <button class="btn btn-secondary openDeleteModal">批量删除</button>
+            <!--<div class="pull-right">-->
+                <!--<select class="form-control" style="float: left">-->
+                    <!--<option value="">导出当前</option>-->
+                    <!--<option value="all">导出所有</option>-->
+                    <!--<option value="selected">导出选中</option>-->
+                <!--</select>-->
+            <!--</div>-->
+        </div>
+        <table
+                id="table"
+                data-unique-id="id"
+                data-show-columns="true"
+                data-toggle="table"
+                data-height="900"
+                data-pagination="true"
+                data-side-pagination="server"
+                data-page-list="[10 ,20, 50, 100, 200, All]"
+                data-page-size="20"
+                data-click-to-select="true"
+                data-toolbar="#toolbar"
+                data-show-toggle="ture"
+                data-show-refresh="true"
+                data-show-export="true"
+                data-cookie="true"
+                data-search="true"
+                data-advanced-search="true"
+                data-query-params="queryParams"
+                data-method="post"
+                data-url="http://127.0.0.1:3000/getPlatformData/pptPlatform"
+                data-key-events="true"
+                class="table table-striped">
+            <!--data-ajax="ajaxRequest"-->
+
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th data-field="state" data-checkbox="true"></th>-->
+                <!--<th data-field="id">序号</th>-->
+                <!--<th data-field="name">设备名称</th>-->
+                <!--<th data-field="ip">设备IP地址</th>-->
+                <!--<th data-field="protocol">通信协议</th>-->
+                <!--<th data-field="localport">本地端口</th>-->
+                <!--<th data-field="teleport">远程端口</th>-->
+                <!--<th data-field="isenter">是否换行</th>-->
+                <!--<th data-field="remark">备注</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+        </table>
+    </div>
+    <!-- PPT管理弹框 -->
+    <div class="modal fade" id="modal_pptPlatform" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header alert-default">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">
+                        <span class="glyphicon glyphicon-list" aria-hidden="true">PPT管理<span></span></span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="cmxform" id="pptPlatform" method="post" action="/" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label >设备名称:</label>
+                            <input type="text" class="form-control"  name="name"  placeholder="请输入设备名称" required>
+                        </div>
+                        <div class="form-group">
+                            <label >设备IP地址 :</label>
+                            <input type="text" name="ip" class="form-control" placeholder="请输入设备IP地址">
+                        </div>
+                        <div class="form-group">
+                            <label >通信协议 :</label>
+                            <select name="protocol"  class="form-control form_protocol">
+                                <option value="">请选择</option>
+                                <option value="TcpClient">TcpClient</option>
+                                <option value="TcpServer">TcpServer</option>
+                                <option value="UDPClinet">UDPClinet</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>本地端口 :</label>
+                            <input type="text" class="form-control" name="localport" placeholder="请输入本地端口">
+                        </div>
+                        <div class="form-group">
+                            <label>远程端口 :</label>
+                            <input type="text" class="form-control" name="teleport" placeholder="请输入远程端口">
+                        </div>
+                        <div class="form-group">
+                            <label>是否换行 :</label>
+                            <select name="isenter" class="form-control">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>备注:</label>
+                            <input type="text" class="form-control" name="remark" placeholder="请输入备注">
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary submit" type="submit">确认</button>
+                            <button class="btn btn-primary modify" type="submit">确认</button>
+                            <button class="btn btn-primary" data-dismiss="modal" type="button">取消</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 视频管理弹框 -->
+    <div class="modal fade" id="modal_videoPlatform" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header alert-default">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title ">
+                        <span class="glyphicon glyphicon-list" aria-hidden="true">视频管理<span></span></span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="cmxform" id="videoPlatform" method="post" action="/" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label >设备名称:</label>
+                            <input type="text" class="form-control"  name="name"  placeholder="请输入设备名称" required>
+                        </div>
+                        <div class="form-group">
+                            <label >设备IP地址 :</label>
+                            <input type="text" name="ip" class="form-control" placeholder="请输入设备IP地址">
+                        </div>
+                        <div class="form-group">
+                            <label >通信协议 :</label>
+                            <select name="protocol" class="form-control">
+                                <option value="TcpClient">TcpClient</option>
+                                <option value="TcpServer">TcpServer</option>
+                                <option value="UDPClinet">UDPClinet</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>本地端口 :</label>
+                            <input type="text" class="form-control" name="localport" placeholder="请输入本地端口">
+                        </div>
+                        <div class="form-group">
+                            <label>远程端口 :</label>
+                            <input type="text" class="form-control" name="teleport" placeholder="请输入远程端口">
+                        </div>
+                        <div class="form-group">
+                            <label>是否换行 :</label>
+                            <select name="isenter" class="form-control">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>备注:</label>
+                            <input type="text" class="form-control" name="remark" placeholder="请输入备注">
+                        </div>
+                        <div class="modal-footer has-success">
+                            <button class="btn btn-primary submit" type="submit">确认</button>
+                            <button class="btn btn-primary modify" type="submit">确认</button>
+                            <button class="btn btn-primary" data-dismiss="modal" type="button">取消</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 链接管理弹框 -->
+    <div class="modal fade" id="modal_urlPlatform" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header alert-default">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title ">
+                        <span class="glyphicon glyphicon-list" aria-hidden="true">链接管理<span></span></span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="cmxform" id="urlPlatform" method="post" action="/" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label >链接地址:</label>
+                            <input type="text" class="form-control"  name="alink"  placeholder="请输入链接地址" required>
+                        </div>
+                        <div class="form-group">
+                            <label >设备IP地址 :</label>
+                            <input type="text" name="ip" class="form-control" placeholder="请输入设备IP地址">
+                        </div>
+                        <div class="form-group">
+                            <label >通信协议 :</label>
+                            <select name="protocol" class="form-control">
+                                <option value="TcpClient">TcpClient</option>
+                                <option value="TcpServer">TcpServer</option>
+                                <option value="UDPClinet">UDPClinet</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>本地端口 :</label>
+                            <input type="text" class="form-control" name="localport" placeholder="请输入本地端口">
+                        </div>
+                        <div class="form-group">
+                            <label>远程端口 :</label>
+                            <input type="text" class="form-control" name="teleport" placeholder="请输入远程端口">
+                        </div>
+                        <div class="form-group">
+                            <label>是否换行 :</label>
+                            <select name="isenter" class="form-control">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>备注:</label>
+                            <input type="text" class="form-control" name="remark" placeholder="请输入备注">
+                        </div>
+                        <div class="modal-footer has-success">
+                            <button class="btn btn-primary submit" type="submit">确认</button>
+                            <button class="btn btn-primary modify" type="submit">确认</button>
+                            <button class="btn btn-primary" data-dismiss="modal" type="button">取消</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 其他多媒体管理弹框 -->
+    <div class="modal fade" id="modal_otherMediaPlatform" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header alert-default">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title ">
+                        <span class="glyphicon glyphicon-list" aria-hidden="true">其他多媒体管理<span></span></span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="cmxform" id="otherMediaPlatform" method="post" action="/" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label >设备名称:</label>
+                            <input type="text" class="form-control"  name="name"  placeholder="请输入链接地址" required>
+                        </div>
+                        <div class="form-group">
+                            <label >设备IP地址 :</label>
+                            <input type="text" name="ip" class="form-control" placeholder="请输入设备IP地址">
+                        </div>
+                        <div class="form-group">
+                            <label >通信协议 :</label>
+                            <select name="protocol" class="form-control">
+                                <option value="TcpClient">TcpClient</option>
+                                <option value="TcpServer">TcpServer</option>
+                                <option value="UDPClinet">UDPClinet</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>本地端口 :</label>
+                            <input type="text" class="form-control" name="localport" placeholder="请输入本地端口">
+                        </div>
+                        <div class="form-group">
+                            <label>远程端口 :</label>
+                            <input type="text" class="form-control" name="teleport" placeholder="请输入远程端口">
+                        </div>
+                        <div class="form-group">
+                            <label>是否换行 :</label>
+                            <select name="isenter" class="form-control">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>命令 :</label>
+                            <input type="text" class="form-control" name="command" placeholder="请输入命令">
+                        </div>
+                        <div class="form-group">
+                            <label>命令协议 :</label>
+                            <input type="text" class="form-control" name="protocols" placeholder="请输入命令协议">
+                        </div>
+                        <div class="form-group">
+                            <label>备注:</label>
+                            <input type="text" class="form-control" name="remark" placeholder="请输入备注">
+                        </div>
+                        <div class="modal-footer has-success">
+                            <button class="btn btn-primary submit" type="submit">确认</button>
+                            <button class="btn btn-primary modify" type="submit">确认</button>
+                            <button class="btn btn-primary" data-dismiss="modal" type="button">取消</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 计算机开关机管理弹框 -->
+    <div class="modal fade" id="modal_computerPlatform" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header alert-default">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title ">
+                        <span class="glyphicon glyphicon-list" aria-hidden="true">计算机开关机管理<span></span></span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="cmxform" id="computerPlatform" method="post" action="/" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label >设备名称:</label>
+                            <input type="text" class="form-control"  name="name"  placeholder="请输入链接地址" required>
+                        </div>
+                        <div class="form-group">
+                            <label >设备IP地址 :</label>
+                            <input type="text" name="ip" class="form-control" placeholder="请输入设备IP地址">
+                        </div>
+                        <div class="form-group">
+                            <label >通信协议 :</label>
+                            <select name="protocol" class="form-control">
+                                <option value="TcpClient">TcpClient</option>
+                                <option value="TcpServer">TcpServer</option>
+                                <option value="UDPClinet">UDPClinet</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>本地端口 :</label>
+                            <input type="text" class="form-control" name="localport" placeholder="请输入本地端口">
+                        </div>
+                        <div class="form-group">
+                            <label>远程端口 :</label>
+                            <input type="text" class="form-control" name="teleport" placeholder="请输入远程端口">
+                        </div>
+                        <div class="form-group">
+                            <label>是否换行 :</label>
+                            <select name="isenter" class="form-control">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>开机命令 :</label>
+                            <input type="text" class="form-control" name="oncommand" placeholder="请输入开机命令">
+                        </div>
+                        <div class="form-group">
+                            <label>关机命令 :</label>
+                            <input type="text" class="form-control" name="offcommand" placeholder="请输入关机命令">
+                        </div>
+                        <div class="form-group">
+                            <label>命令协议 :</label>
+                            <input type="text" class="form-control" name="protocols" placeholder="请输入命令协议">
+                        </div>
+                        <div class="form-group">
+                            <label>备注:</label>
+                            <input type="text" class="form-control" name="remark" placeholder="请输入备注">
+                        </div>
+                        <div class="modal-footer has-success">
+                            <button class="btn btn-primary submit" type="submit">确认</button>
+                            <button class="btn btn-primary modify" type="submit">确认</button>
+                            <button class="btn btn-primary" data-dismiss="modal" type="button">取消</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 串口设备管理弹框 -->
+    <div class="modal fade" id="modal_serialDevicePlatform" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header alert-default">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title ">
+                        <span class="glyphicon glyphicon-list" aria-hidden="true">串口设备管理<span></span></span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="cmxform" id="serialDevicePlatform" method="post" action="/" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label >设备名称:</label>
+                            <input type="text" class="form-control"  name="name"  placeholder="请输入链接地址" required>
+                        </div>
+                        <div class="form-group">
+                            <label >设备IP地址 :</label>
+                            <input type="text" name="ip" class="form-control" placeholder="请输入设备IP地址">
+                        </div>
+                        <div class="form-group">
+                            <label >通信协议 :</label>
+                            <select name="protocol" class="form-control">
+                                <option value="TcpClient">TcpClient</option>
+                                <option value="TcpServer">TcpServer</option>
+                                <option value="UDPClinet">UDPClinet</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>本地端口 :</label>
+                            <input type="text" class="form-control" name="localport" placeholder="请输入本地端口">
+                        </div>
+                        <div class="form-group">
+                            <label>远程端口 :</label>
+                            <input type="text" class="form-control" name="teleport" placeholder="请输入远程端口">
+                        </div>
+                        <div class="form-group">
+                            <label>是否换行 :</label>
+                            <select name="isenter" class="form-control">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>开机命令 :</label>
+                            <input type="text" class="form-control" name="oncommand" placeholder="请输入开机命令">
+                        </div>
+                        <div class="form-group">
+                            <label>关机命令 :</label>
+                            <input type="text" class="form-control" name="offcommand" placeholder="请输入关机命令">
+                        </div>
+                        <div class="form-group">
+                            <label>命令协议 :</label>
+                            <input type="text" class="form-control" name="protocols" placeholder="请输入命令协议">
+                        </div>
+                        <div class="form-group">
+                            <label>备注:</label>
+                            <input type="text" class="form-control" name="remark" placeholder="请输入备注">
+                        </div>
+                        <div class="modal-footer has-success">
+                            <button class="btn btn-primary submit" type="submit">确认</button>
+                            <button class="btn btn-primary modify" type="submit">确认</button>
+                            <button class="btn btn-primary" data-dismiss="modal" type="button">取消</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 灯光设备管理弹框 -->
+    <div class="modal fade" id="modal_lightPlatform" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header alert-default">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title ">
+                        <span class="glyphicon glyphicon-list" aria-hidden="true">灯光设备管理<span></span></span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="cmxform" id="lightPlatform" method="post" action="/" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label >设备名称:</label>
+                            <input type="text" class="form-control"  name="name"  placeholder="请输入链接地址" required>
+                        </div>
+                        <div class="form-group">
+                            <label >设备IP地址 :</label>
+                            <input type="text" name="ip" class="form-control" placeholder="请输入设备IP地址">
+                        </div>
+                        <div class="form-group">
+                            <label >通信协议 :</label>
+                            <select name="protocol" class="form-control">
+                                <option value="TcpClient">TcpClient</option>
+                                <option value="TcpServer">TcpServer</option>
+                                <option value="UDPClinet">UDPClinet</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>本地端口 :</label>
+                            <input type="text" class="form-control" name="localport" placeholder="请输入本地端口">
+                        </div>
+                        <div class="form-group">
+                            <label>远程端口 :</label>
+                            <input type="text" class="form-control" name="teleport" placeholder="请输入远程端口">
+                        </div>
+                        <div class="form-group">
+                            <label>是否换行 :</label>
+                            <select name="isenter" class="form-control">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>开灯命令 :</label>
+                            <input type="text" class="form-control" name="oncommand" placeholder="请输入开灯命令">
+                        </div>
+                        <div class="form-group">
+                            <label>关灯命令 :</label>
+                            <input type="text" class="form-control" name="offcommand" placeholder="请输入关灯命令">
+                        </div>
+                        <div class="form-group">
+                            <label>命令协议 :</label>
+                            <input type="text" class="form-control" name="protocols" placeholder="请输入命令协议">
+                        </div>
+                        <div class="form-group">
+                            <label>备注:</label>
+                            <input type="text" class="form-control" name="remark" placeholder="请输入备注">
+                        </div>
+                        <div class="modal-footer has-success">
+                            <button class="btn btn-primary submit" type="submit">确认</button>
+                            <button class="btn btn-primary modify" type="submit">确认</button>
+                            <button class="btn btn-primary" data-dismiss="modal" type="button">取消</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 其他设备管理弹框 -->
+    <div class="modal fade" id="modal_otherDevicePlatform" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header alert-default">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title ">
+                        <span class="glyphicon glyphicon-list" aria-hidden="true">其他设备管理<span></span></span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="cmxform" id="otherDevicePlatform" method="post" action="/" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label >设备名称:</label>
+                            <input type="text" class="form-control"  name="name"  placeholder="请输入链接地址" required>
+                        </div>
+                        <div class="form-group">
+                            <label >设备IP地址 :</label>
+                            <input type="text" name="ip" class="form-control" placeholder="请输入设备IP地址">
+                        </div>
+                        <div class="form-group">
+                            <label >通信协议 :</label>
+                            <select name="protocol" class="form-control">
+                                <option value="TcpClient">TcpClient</option>
+                                <option value="TcpServer">TcpServer</option>
+                                <option value="UDPClinet">UDPClinet</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>本地端口 :</label>
+                            <input type="text" class="form-control" name="localport" placeholder="请输入本地端口">
+                        </div>
+                        <div class="form-group">
+                            <label>远程端口 :</label>
+                            <input type="text" class="form-control" name="teleport" placeholder="请输入远程端口">
+                        </div>
+                        <div class="form-group">
+                            <label>是否换行 :</label>
+                            <select name="isenter" class="form-control">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>开命令 :</label>
+                            <input type="text" class="form-control" name="oncommand" placeholder="请输入开命令">
+                        </div>
+                        <div class="form-group">
+                            <label>关命令 :</label>
+                            <input type="text" class="form-control" name="offcommand" placeholder="请输入关命令">
+                        </div>
+                        <div class="form-group">
+                            <label>命令协议 :</label>
+                            <input type="text" class="form-control" name="protocols" placeholder="请输入命令协议">
+                        </div>
+                        <div class="form-group">
+                            <label>备注:</label>
+                            <input type="text" class="form-control" name="remark" placeholder="请输入备注">
+                        </div>
+                        <div class="modal-footer has-success">
+                            <button class="btn btn-primary submit" type="submit">确认</button>
+                            <button class="btn btn-primary modify" type="submit">确认</button>
+                            <button class="btn btn-primary" data-dismiss="modal" type="button">取消</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 确认删除弹框 -->
+    <div class="modal fade" id="deletedModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><span class="glyphicon glyphicon-list" aria-hidden="true"><span>PPT管理</span></span></h4>
+                </div>
+                <div class="modal-body">
+                    确认删除<span></span>吗？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary delete" data-dismiss="modal">确认删除</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/jquery.3.3.1.js"></script>
+    <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap-table-tableExport.min.js"></script>
+    <script src="/js/bootstrap-table.min.js"></script>
+    <script src="/js/bootstrap-table-export.min.js"></script>
+    <script src="/js/bootstrap-table-accent-neutralise.min.js"></script>
+    <script src="/databaseOperatingPlatform/js/columns.js"></script>
+    <script src="/databaseOperatingPlatform/js/service.js"></script>
+    <script src="/databaseOperatingPlatform/js/index.js"></script>
+</body>
+</html>

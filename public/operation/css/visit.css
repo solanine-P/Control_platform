@@ -1,0 +1,73 @@
+.container>div{
+    width:100%;
+    height:100%;
+    padding:0;
+    margin:0;
+    overflow:hidden;
+    position:absolute;
+    left:0;
+    top:0;
+}
+.exhibition{
+    z-index:100;
+}
+.media{
+    z-index:200;
+    display:none;
+}
+.device{
+    z-index:300;
+    display:none;
+}
+.container>div>a{
+    position:absolute;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+    margin:0;
+    color:#fff;
+}
+.container>div>button{
+    position:absolute;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+    margin:0;
+    color:#fff;
+    border:none;
+    outline:none;
+}
+.container>.word{
+    z-index:500;
+    background-color:#fff;
+    display:none;
+}
+.container>.keyMouse{
+    display:none;
+    background-color:#fff;
+    z-index:600;
+}
+.keyMouse>button,.word>button{
+    position:absolute;
+    right:30px;
+    top:30px;
+    width:89px;
+    height:77px;
+}
+.keyMouse>div{
+    height:50%;
+    width:100%;
+    border:1px solid #000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.word>div{
+    width:70%;
+    height:70%;
+    margin-top:15%;
+    margin-left:15%;
+    resize:none
+}
